@@ -553,13 +553,13 @@ class Ui_FragilityCurvesTool(object):
         self.DSTags_value_1 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents_2)
         self.DSTags_value_1.setGeometry(QtCore.QRect(120, 565, 141, 21))
         self.DSTags_value_1.setObjectName("DSTags_value_1")
-        self.DSTags_value_1.setText("Leve,Moderado,Severo,Colapso")          # Valor por defecto
+        self.DSTags_value_1.setText("Slight,Moderate,Severe,Collapse")          # Valor por defecto
         
         # Línea para colocar nombres de estados de daño para fragilidad de la edificación 2
         self.DSTags_value_2 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents_2)
         self.DSTags_value_2.setGeometry(QtCore.QRect(1450, 565, 141, 21))
         self.DSTags_value_2.setObjectName("DSTags_value_2")
-        self.DSTags_value_2.setText("Leve,Moderado,Severo,Colapso")          # Valor por defecto
+        self.DSTags_value_2.setText("Slight,Moderate,Severe,Collapse")          # Valor por defecto
         
         # Etiqueta de vector para porcentajes de curvas de fragilidad de la edificación 1
         self.porc_fit_curves_Label_1 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
@@ -601,16 +601,16 @@ class Ui_FragilityCurvesTool(object):
         self.collapseMethod_1 = QtWidgets.QComboBox(self.scrollAreaWidgetContents_2)
         self.collapseMethod_1.setGeometry(QtCore.QRect(120, 615, 141, 22))
         self.collapseMethod_1.setObjectName("collapseMethod_1")
-        self.collapseMethod_1.addItem("fit")             # Adiciona opción de desplegable
         self.collapseMethod_1.addItem("count")           # Adiciona opción de desplegable
+        self.collapseMethod_1.addItem("fit")             # Adiciona opción de desplegable
         self.collapseMethod_1.addItem("count columns")   # Adiciona opción de desplegable
         
         # Desplegable de selección de tipo métodología para estimar colapso de la edificación 2
         self.collapseMethod_2 = QtWidgets.QComboBox(self.scrollAreaWidgetContents_2)
         self.collapseMethod_2.setGeometry(QtCore.QRect(1450, 615, 141, 22))
         self.collapseMethod_2.setObjectName("collapseMethod_2")
-        self.collapseMethod_2.addItem("fit")             # Adiciona opción de desplegable
         self.collapseMethod_2.addItem("count")           # Adiciona opción de desplegable
+        self.collapseMethod_2.addItem("fit")             # Adiciona opción de desplegable
         self.collapseMethod_2.addItem("count columns")   # Adiciona opción de desplegable
         
         # Etiqueta de selección de tipo de bineado de la edificación 1
@@ -1163,72 +1163,13 @@ class Ui_FragilityCurvesTool(object):
         self.input_label.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.input_label.setObjectName("input_label")
         
-        # ----------------------
-        # TEST
-        
-        # Título
-        self.Test1_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.Test1_3.setGeometry(QtCore.QRect(50, 40, 71, 16))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setUnderline(True)
-        font.setWeight(75)
-        self.Test1_3.setFont(font)
-        self.Test1_3.setObjectName("Test1_3")
-        
-        # Etiqueta para el tipo de test
-        self.type_test = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.type_test.setGeometry(QtCore.QRect(10, 70, 101, 21))
-        self.type_test.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.type_test.setObjectName("type_test")
-        
-        # Desplegable para seleccionar de donde viene el input del test
-        self.Test_specification = QtWidgets.QComboBox(self.scrollAreaWidgetContents_3)
-        self.Test_specification.setGeometry(QtCore.QRect(120, 70, 151, 22))
-        self.Test_specification.setObjectName("Test_specification")
-        self.Test_specification.addItem("Same for all typologies")            # Adiciona opción de desplegable
-        self.Test_specification.addItem("Specified in guide file")            # Adiciona opción de desplegable
-        
-        # Etiqueta para introducir tmin
-        self.tminLabel_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.tminLabel_3.setGeometry(QtCore.QRect(50, 95, 61, 21))
-        self.tminLabel_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.tminLabel_3.setObjectName("tminLabel_3")
-        
-        # Linea para introducir tmin
-        self.tmin_value_3 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents_3)
-        self.tmin_value_3.setGeometry(QtCore.QRect(120, 95, 81, 21))
-        self.tmin_value_3.setObjectName("tmin_value_3")
-        self.tmin_value_3.setText("0.9")       # Valor por defecto
-        
-        # Texto de rango ed valores para tmin
-        self.range_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.range_3.setGeometry(QtCore.QRect(205, 95, 71, 21))
-        self.range_3.setObjectName("range_3")
-        
-        # Etiqueta para introducir 
-        self.EDPlimLabel_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.EDPlimLabel_3.setGeometry(QtCore.QRect(50, 120, 61, 21))
-        self.EDPlimLabel_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.EDPlimLabel_3.setObjectName("EDPlimLabel_3")
-        
-        # Línea para introducir SDR_lim
-        self.EDP_value_3 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents_3)
-        self.EDP_value_3.setGeometry(QtCore.QRect(120, 120, 81, 21))
-        self.EDP_value_3.setObjectName("EDP_value_3")
-        self.EDP_value_3.setText("0.04")          # Valor por defecto
-        
-        # # Texto de porcentaje de SDR_lim
-        # self.porc_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        # self.porc_3.setGeometry(QtCore.QRect(205, 120, 51, 21))
-        # self.porc_3.setObjectName("porc_3")
         
         # ----------------------
         # IM AND EDP DEFINITION
         
         # Título
         self.IM_EDP_selection_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.IM_EDP_selection_3.setGeometry(QtCore.QRect(310, 40, 171, 16))
+        self.IM_EDP_selection_3.setGeometry(QtCore.QRect(80, 60, 171, 16))
         font = QtGui.QFont()
         font.setBold(True)
         font.setUnderline(True)
@@ -1238,38 +1179,38 @@ class Ui_FragilityCurvesTool(object):
         
         # Etiqueta para introducir periodos
         self.PeriodoLabel_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.PeriodoLabel_3.setGeometry(QtCore.QRect(310, 70, 61, 21))
+        self.PeriodoLabel_3.setGeometry(QtCore.QRect(40, 90, 61, 21))
         self.PeriodoLabel_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.PeriodoLabel_3.setObjectName("PeriodoLabel_3")
         
         # Linea para introducir periodos
         self.periodo_value_3 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents_3)
-        self.periodo_value_3.setGeometry(QtCore.QRect(380, 70, 141, 21))
+        self.periodo_value_3.setGeometry(QtCore.QRect(110, 90, 141, 21))
         self.periodo_value_3.setObjectName("periodo_value_3")
         self.periodo_value_3.setText("0.6,1")                       # Valor por defecto
         
         # Etiqueta para selección de tipo de IM
         self.IMType_Label_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.IMType_Label_3.setGeometry(QtCore.QRect(320, 95, 51, 20))
+        self.IMType_Label_3.setGeometry(QtCore.QRect(50, 115, 51, 20))
         self.IMType_Label_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.IMType_Label_3.setObjectName("IMType_Label_3")
         
         # Desplegable para seleccionar tipo de IM
         self.IMType_Value_3 = QtWidgets.QComboBox(self.scrollAreaWidgetContents_3)
-        self.IMType_Value_3.setGeometry(QtCore.QRect(380, 95, 73, 22))
+        self.IMType_Value_3.setGeometry(QtCore.QRect(110, 115, 73, 22))
         self.IMType_Value_3.setObjectName("IMType_Value_3")
         self.IMType_Value_3.addItem("Sa")            # Adiciona opción de desplegable
         self.IMType_Value_3.addItem("SaAVG")         # Adiciona opción de desplegable
         
         # Etiqueta para tipo de EDP
         self.EDPType_Label_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.EDPType_Label_3.setGeometry(QtCore.QRect(310, 120, 61, 20))
+        self.EDPType_Label_3.setGeometry(QtCore.QRect(40, 140, 61, 20))
         self.EDPType_Label_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.EDPType_Label_3.setObjectName("EDPType_Label_3")
         
         # Desplegable para introducir tipo de EDP
         self.EDPType_Value_3 = QtWidgets.QComboBox(self.scrollAreaWidgetContents_3)
-        self.EDPType_Value_3.setGeometry(QtCore.QRect(380, 120, 73, 22))
+        self.EDPType_Value_3.setGeometry(QtCore.QRect(110, 140, 73, 22))
         self.EDPType_Value_3.setObjectName("EDPType_Value_3")
         self.EDPType_Value_3.addItem("SDR")         # Adiciona opción de desplegable
         self.EDPType_Value_3.addItem("RSDR")        # Adiciona opción de desplegable
@@ -1277,7 +1218,7 @@ class Ui_FragilityCurvesTool(object):
         
         # Desplegable para introducir el piso del EDP considerado
         self.EDPType_ValueStory_3 = QtWidgets.QComboBox(self.scrollAreaWidgetContents_3)
-        self.EDPType_ValueStory_3.setGeometry(QtCore.QRect(460, 120, 61, 22))
+        self.EDPType_ValueStory_3.setGeometry(QtCore.QRect(190, 140, 61, 22))
         self.EDPType_ValueStory_3.setObjectName("EDPType_ValueStory_3")
         self.EDPType_ValueStory_3.addItem("max")         # Adiciona opción de desplegable
 
@@ -1287,7 +1228,7 @@ class Ui_FragilityCurvesTool(object):
         
         # Título
         self.FragilityTittle_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.FragilityTittle_3.setGeometry(QtCore.QRect(620, 40, 171, 16))
+        self.FragilityTittle_3.setGeometry(QtCore.QRect(560, 60, 171, 16))
         font = QtGui.QFont()
         font.setBold(True)
         font.setUnderline(True)
@@ -1297,51 +1238,51 @@ class Ui_FragilityCurvesTool(object):
         
         # Etiqueta para introducir porcentajes de curvas
         self.porc_fit_curves_Label_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.porc_fit_curves_Label_3.setGeometry(QtCore.QRect(600, 70, 111, 21))
+        self.porc_fit_curves_Label_3.setGeometry(QtCore.QRect(340, 90, 111, 21))
         self.porc_fit_curves_Label_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.porc_fit_curves_Label_3.setObjectName("porc_fit_curves_Label_3")
         
         # Linea para introducir porcentajes de curvas
         self.porc_fit_curves_3 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents_3)
-        self.porc_fit_curves_3.setGeometry(QtCore.QRect(720, 70, 141, 21))
+        self.porc_fit_curves_3.setGeometry(QtCore.QRect(460, 90, 141, 21))
         self.porc_fit_curves_3.setObjectName("porc_fit_curves_3")
         self.porc_fit_curves_3.setText("1,1,1,1")                            # Valor por defecto
         
         # Etiqueta para introducir el tipo de bineado
         self.binLabel_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.binLabel_3.setGeometry(QtCore.QRect(640, 95, 71, 21))
+        self.binLabel_3.setGeometry(QtCore.QRect(380, 115, 71, 21))
         self.binLabel_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.binLabel_3.setObjectName("binLabel_3")
         
         # Desplegable para seleccionar tipo de bineado
         self.Bintype_3 = QtWidgets.QComboBox(self.scrollAreaWidgetContents_3)
-        self.Bintype_3.setGeometry(QtCore.QRect(720, 95, 141, 22))
+        self.Bintype_3.setGeometry(QtCore.QRect(460, 115, 141, 22))
         self.Bintype_3.setObjectName("Bintype_3")
         self.Bintype_3.addItem("Logspace")      # Adiciona opción de desplegable
         self.Bintype_3.addItem("Linespace")     # Adiciona opción de desplegable
         
         # Etiqueta para indicar si se incluye censura en el bineado
         self.include_cens_Label_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.include_cens_Label_3.setGeometry(QtCore.QRect(610, 120, 101, 21))
+        self.include_cens_Label_3.setGeometry(QtCore.QRect(350, 140, 101, 21))
         self.include_cens_Label_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.include_cens_Label_3.setObjectName("include_cens_Label_3")
         
         # Desplegable para indicar si se incluye censura en el bineado
         self.includeCens_3 = QtWidgets.QComboBox(self.scrollAreaWidgetContents_3)
-        self.includeCens_3.setGeometry(QtCore.QRect(720, 120, 141, 22))
+        self.includeCens_3.setGeometry(QtCore.QRect(460, 140, 141, 22))
         self.includeCens_3.setObjectName("includeCens_3")
         self.includeCens_3.addItem("Yes")        # Adiciona opción de desplegable
         self.includeCens_3.addItem("No")         # Adiciona opción de desplegable
         
         # Etiqueta para indicar el metodo de colapso a utilizar
         self.collapseMethod_Label_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.collapseMethod_Label_3.setGeometry(QtCore.QRect(600, 145, 111, 21))
+        self.collapseMethod_Label_3.setGeometry(QtCore.QRect(620, 90, 111, 21))
         self.collapseMethod_Label_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.collapseMethod_Label_3.setObjectName("collapseMethod_Label_3")
         
         # Desplegable para indicar el metodo de colapso a utilizar
         self.collapseMethod_3 = QtWidgets.QComboBox(self.scrollAreaWidgetContents_3)
-        self.collapseMethod_3.setGeometry(QtCore.QRect(720, 145, 141, 22))
+        self.collapseMethod_3.setGeometry(QtCore.QRect(740, 90, 141, 22))
         self.collapseMethod_3.setObjectName("collapseMethod_3")
         self.collapseMethod_3.addItem("count")           # Adiciona opción de desplegable
         self.collapseMethod_3.addItem("count columns")   # Adiciona opción de desplegable
@@ -1349,25 +1290,25 @@ class Ui_FragilityCurvesTool(object):
         
         # Etiqueta para introducir el minimo número de datos por bin
         self.binMinLabel_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.binMinLabel_3.setGeometry(QtCore.QRect(620, 170, 91, 21))
+        self.binMinLabel_3.setGeometry(QtCore.QRect(640, 115, 91, 21))
         self.binMinLabel_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.binMinLabel_3.setObjectName("binMinLabel_3")
         
         # Línea para introducir el minimo número de datos por bin
         self.binminvalue_3 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents_3)
-        self.binminvalue_3.setGeometry(QtCore.QRect(720, 170, 141, 21))
+        self.binminvalue_3.setGeometry(QtCore.QRect(740, 115, 141, 21))
         self.binminvalue_3.setObjectName("binminvalue_3")
         self.binminvalue_3.setText("15")        # Valor por defecto
         
         # Etiqueta para introducir el número de bines inicial
         self.initialBinLabel_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_3)
-        self.initialBinLabel_3.setGeometry(QtCore.QRect(610, 195, 101, 21))
+        self.initialBinLabel_3.setGeometry(QtCore.QRect(630, 140, 101, 21))
         self.initialBinLabel_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.initialBinLabel_3.setObjectName("initialBinLabel_3")
         
         # Línea para introducir el número de bines inicial
         self.bininitialvalue_3 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents_3)
-        self.bininitialvalue_3.setGeometry(QtCore.QRect(720, 195, 141, 21))
+        self.bininitialvalue_3.setGeometry(QtCore.QRect(740, 140, 141, 21))
         self.bininitialvalue_3.setObjectName("bininitialvalue_3")
         self.bininitialvalue_3.setText("50")    # Valor por defecto
         
@@ -1709,7 +1650,7 @@ class Ui_FragilityCurvesTool(object):
         self.changeType_value_1.setObjectName("changeType_value_1")
         self.changeType_value_1.addItem("None")                 # Adiciona opción de desplegable
         self.changeType_value_1.addItem("Parameters")           # Adiciona opción de desplegable
-        self.changeType_value_1.addItem("% curves fitting")     # Adiciona opción de desplegable
+        self.changeType_value_1.addItem("% Curves fitting")     # Adiciona opción de desplegable
         self.changeType_value_1.addItem("IM limits")            # Adiciona opción de desplegable
         
         # Desplegable para tipo de cambio de la grafica de taxonomia 2
@@ -1718,7 +1659,7 @@ class Ui_FragilityCurvesTool(object):
         self.changeType_value_2.setObjectName("changeType_value_2")
         self.changeType_value_2.addItem("None")                 # Adiciona opción de desplegable
         self.changeType_value_2.addItem("Parameters")           # Adiciona opción de desplegable
-        self.changeType_value_2.addItem("% curves fitting")     # Adiciona opción de desplegable
+        self.changeType_value_2.addItem("% Curves fitting")     # Adiciona opción de desplegable
         self.changeType_value_2.addItem("IM limits")            # Adiciona opción de desplegable
         
         # Etiqueta para introducir nuevos valores theta de la taxonomia 1
@@ -3337,11 +3278,11 @@ class Ui_FragilityCurvesTool(object):
         self.j_Label_1.setText(_translate("FragilityCurvesTool", "Thresholds SEC =")) 
         self.j_Label_2.setText(_translate("FragilityCurvesTool", "Thresholds SEC ="))
         
-        self.theta_Label_1.setText(_translate("FragilityCurvesTool", "Theta - DS ="))
-        self.theta_Label_2.setText(_translate("FragilityCurvesTool", "Theta - DS ="))
+        self.theta_Label_1.setText(_translate("FragilityCurvesTool", "θ DS-EDP ="))
+        self.theta_Label_2.setText(_translate("FragilityCurvesTool", "θ DS-EDPS ="))
         
-        self.sigma_Label_1.setText(_translate("FragilityCurvesTool", "Sigma - DS ="))
-        self.sigma_Label_2.setText(_translate("FragilityCurvesTool", "Sigma - DS ="))
+        self.sigma_Label_1.setText(_translate("FragilityCurvesTool", "β DS-EDP ="))
+        self.sigma_Label_2.setText(_translate("FragilityCurvesTool", "β DS-EDP ="))
         
         self.EDPCollapse_Label_1.setText(_translate("FragilityCurvesTool", "EDP Collapse ="))
         self.EDPCollapse_Label_2.setText(_translate("FragilityCurvesTool", "EDP Collapse ="))
@@ -3349,8 +3290,8 @@ class Ui_FragilityCurvesTool(object):
         self.DSTags_Label_1.setText(_translate("FragilityCurvesTool", "DS Tags ="))
         self.DSTags_Label_2.setText(_translate("FragilityCurvesTool", "DS Tags ="))
         
-        self.porc_fit_curves_Label_1.setText(_translate("FragilityCurvesTool", "% curves fitting ="))
-        self.porc_fit_curves_Label_2.setText(_translate("FragilityCurvesTool", "% curves fitting ="))
+        self.porc_fit_curves_Label_1.setText(_translate("FragilityCurvesTool", "% Curves fitting ="))
+        self.porc_fit_curves_Label_2.setText(_translate("FragilityCurvesTool", "% Curves fitting ="))
         
         self.binLabel_1.setText(_translate("FragilityCurvesTool", " Bin type ="))
         self.binLabel_2.setText(_translate("FragilityCurvesTool", "Bin type ="))
@@ -3358,11 +3299,11 @@ class Ui_FragilityCurvesTool(object):
         self.collapseMethod_Label_1.setText(_translate("FragilityCurvesTool", "Collapse Method ="))
         self.collapseMethod_Label_2.setText(_translate("FragilityCurvesTool", "Collapse Method ="))
         
-        self.binMinLabel_1.setText(_translate("FragilityCurvesTool", "Bin_minData ="))
-        self.binMinLabel_2.setText(_translate("FragilityCurvesTool", " Bin_minData ="))
+        self.binMinLabel_1.setText(_translate("FragilityCurvesTool", "MinData_Bin ="))
+        self.binMinLabel_2.setText(_translate("FragilityCurvesTool", "MinData_Bin ="))
         
-        self.initialBinLabel_1.setText(_translate("FragilityCurvesTool", "Initial_numBin ="))
-        self.initialBinLabel_2.setText(_translate("FragilityCurvesTool", "Initial_numBin ="))
+        self.initialBinLabel_1.setText(_translate("FragilityCurvesTool", "Initial_NumBins ="))
+        self.initialBinLabel_2.setText(_translate("FragilityCurvesTool", "Initial_NumBins ="))
         
         # ----------------------------------------------------------
         # Autores
@@ -3423,15 +3364,6 @@ class Ui_FragilityCurvesTool(object):
         # ----------------------------------------------------------
         # INPUTS
         self.input_label.setText(_translate("FragilityCurvesTool", "INPUTS"))
-        self.type_test.setText(_translate("FragilityCurvesTool", "Input Type ="))
-        
-        # ---------------------------
-        # TEST
-        self.Test1_3.setText(_translate("FragilityCurvesTool", "TEST"))
-        self.tminLabel_3.setText(_translate("FragilityCurvesTool", "tmin ="))
-        self.range_3.setText(_translate("FragilityCurvesTool", "range: [0-1]"))
-        self.EDPlimLabel_3.setText(_translate("FragilityCurvesTool", "SDR lim ="))
-        # self.porc_3.setText(_translate("FragilityCurvesTool", "[%]"))
         
         # ---------------------------
         # IM AND EDP DEFINITION
@@ -3443,12 +3375,12 @@ class Ui_FragilityCurvesTool(object):
         # ---------------------------
         # FRAGILITY PARAMETERS
         self.FragilityTittle_3.setText(_translate("FragilityCurvesTool", "FRAGILITY PARAMETERS"))
-        self.porc_fit_curves_Label_3.setText(_translate("FragilityCurvesTool", "% curves fitting ="))
+        self.porc_fit_curves_Label_3.setText(_translate("FragilityCurvesTool", "% Curves fitting ="))
         self.binLabel_3.setText(_translate("FragilityCurvesTool", " Bin type ="))
         self.include_cens_Label_3.setText(_translate("FragilityCurvesTool", "Include Cens ="))
         self.collapseMethod_Label_3.setText(_translate("FragilityCurvesTool", "Collapse Method ="))
-        self.binMinLabel_3.setText(_translate("FragilityCurvesTool", "Bin_minData ="))
-        self.initialBinLabel_3.setText(_translate("FragilityCurvesTool", "Initial_numBin ="))
+        self.binMinLabel_3.setText(_translate("FragilityCurvesTool", "MinData_Bin ="))
+        self.initialBinLabel_3.setText(_translate("FragilityCurvesTool", "Initial_NumBins ="))
          
         # ---------------------------
         # GROUPING OF BUILDINGS
@@ -3510,14 +3442,14 @@ class Ui_FragilityCurvesTool(object):
         self.changeType_Label_1.setText(_translate("FragilityCurvesTool", "Change Type ="))
         self.changeType_Label_2.setText(_translate("FragilityCurvesTool", "Change Type ="))
         
-        self.thetaTax_Label_1.setText(_translate("FragilityCurvesTool", "Theta - DS ="))
-        self.thetaTax_Label_2.setText(_translate("FragilityCurvesTool", "Theta - DS ="))
+        self.thetaTax_Label_1.setText(_translate("FragilityCurvesTool", "θ DS-IM ="))
+        self.thetaTax_Label_2.setText(_translate("FragilityCurvesTool", "θ DS-IM ="))
         
-        self.sigmaTax_Label_1.setText(_translate("FragilityCurvesTool", "Sigma - DS ="))
-        self.sigmaTax_Label_2.setText(_translate("FragilityCurvesTool", "Sigma - DS ="))
+        self.sigmaTax_Label_1.setText(_translate("FragilityCurvesTool", "β DS-IM ="))
+        self.sigmaTax_Label_2.setText(_translate("FragilityCurvesTool", "β DS-IMS ="))
         
-        self.porc_fit_curves_changes_Label_1.setText(_translate("FragilityCurvesTool", "% curves fitting ="))
-        self.porc_fit_curves_changes_Label_2.setText(_translate("FragilityCurvesTool", "% curves fitting ="))
+        self.porc_fit_curves_changes_Label_1.setText(_translate("FragilityCurvesTool", "% Curves fitting ="))
+        self.porc_fit_curves_changes_Label_2.setText(_translate("FragilityCurvesTool", "% Curves fitting ="))
         
         self.IM_vals_changes_Label_1.setText(_translate("FragilityCurvesTool", "IM limits ="))
         self.IM_vals_changes_Label_2.setText(_translate("FragilityCurvesTool", "IM limits ="))
@@ -3649,20 +3581,20 @@ class Ui_FragilityCurvesTool(object):
         self.DV_IM_options_1.setText(_translate("FragilityCurvesTool", "GRAPH OPTIONS: DV-IM"))
         self.DV_IM_options_2.setText(_translate("FragilityCurvesTool", "GRAPH OPTIONS: DV-IM"))
         
-        self.SDRLoss_cens_Label_1.setText(_translate("FragilityCurvesTool", "SDR cens ="))
-        self.SDRLoss_cens_Label_2.setText(_translate("FragilityCurvesTool", "SDR cens ="))
+        self.SDRLoss_cens_Label_1.setText(_translate("FragilityCurvesTool", "SDR cens limit ="))
+        self.SDRLoss_cens_Label_2.setText(_translate("FragilityCurvesTool", "SDR cens limit ="))
         
-        self.Theta_collapse_Label_1.setText(_translate("FragilityCurvesTool", "Theta collapse ="))
-        self.Theta_collapse_Label_2.setText(_translate("FragilityCurvesTool", "Theta collapse ="))
+        self.Theta_collapse_Label_1.setText(_translate("FragilityCurvesTool", "θ collapse DS-IM ="))
+        self.Theta_collapse_Label_2.setText(_translate("FragilityCurvesTool", "θ collapse DS-IM ="))
         
-        self.Sigma_collapse_Label_1.setText(_translate("FragilityCurvesTool", "Sigma collapse ="))
-        self.Sigma_collapse_Label_2.setText(_translate("FragilityCurvesTool", "Sigma collapse ="))
+        self.Sigma_collapse_Label_1.setText(_translate("FragilityCurvesTool", "β collapse DS-IM ="))
+        self.Sigma_collapse_Label_2.setText(_translate("FragilityCurvesTool", "β collapse DS-IM ="))
         
-        self.Theta_rsdr_Label_1.setText(_translate("FragilityCurvesTool", "Theta RSDR ="))
-        self.Theta_rsdr_Label_2.setText(_translate("FragilityCurvesTool", "Theta RSDR ="))
+        self.Theta_rsdr_Label_1.setText(_translate("FragilityCurvesTool", "θ RSDR DS-EDP ="))
+        self.Theta_rsdr_Label_2.setText(_translate("FragilityCurvesTool", "θ RSDR DS-EDP ="))
         
-        self.Sigma_rsdr_Label_1.setText(_translate("FragilityCurvesTool", "Sigma RSDR ="))
-        self.Sigma_rsdr_Label_2.setText(_translate("FragilityCurvesTool", "Sigma RSDR ="))
+        self.Sigma_rsdr_Label_1.setText(_translate("FragilityCurvesTool", "β RSDR DS-EDP ="))
+        self.Sigma_rsdr_Label_2.setText(_translate("FragilityCurvesTool", "β RSDR DS-EDP ="))
         
         self.ED_Label_1.setText(_translate("FragilityCurvesTool", "E[L|NC + D] ="))
         self.ED_Label_2.setText(_translate("FragilityCurvesTool", "E[L|NC + D] ="))
