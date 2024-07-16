@@ -370,20 +370,21 @@ def fragility_function_prob_collapseOptions(dataF_IM_EDP_Hz, EDP_cens, thetas_DS
         # LLenado de número de datos que sobrepasan EDP_cens
         collapse_count['#ColapsosCens'][i] = collapse_count['#DatosTodos'][i] - len(ind)
         
-        # Estimación de probabilidad de colapso a partir del conteo de soprepaso o no de Censura
+        # Estimación de probabilidad de colapso a partir del conteo de soprepaso o no del límite de Censura
         collapse_count['P(ColapsoNoCens)'][i] = collapse_count['#ColapsosCens'][i]/collapse_count['#DatosTodos'][i]
         
         # Remplazo de deriva residual (cuando sea el caso) de 0 a un numero muy pequeño
         ind[ind['EDP'] == 0] = 1e-8
         
         try:
-            # Ajuste a función lognormal
+            # Ajuste a función lognormal de los datos que se encuentran por debajo de la censura
             shape, loc, scale = stats.lognorm.fit(ind['EDP'].astype(float), floc=0)
             mu = np.log(scale)
             sigma = shape
         except:
             raise Exception('Error in Step 2 of the function of Fragility: It is not possible to fit a lognormal for IM_bin = {}'.format(current_IM_bin))
         
+        # Guardado de parámetros fitted
         parameters['#DatosCensurados'][i] = len(ind)
         parameters['mu'][i] = mu
         parameters['theta'][i] = np.exp(mu)
@@ -423,13 +424,10 @@ def fragility_function_prob_collapseOptions(dataF_IM_EDP_Hz, EDP_cens, thetas_DS
         mu = parameters['mu'][i]
         sigma = parameters['sigma'][i]
         
-        # ------------------------------------------------------
-        # Curva pdf de los EDPs del bin actual    
-        
         # Valores pdf(edp_values)
         pdf_edp_value_i = stats.lognorm.pdf(x = edp_values, scale = np.exp(mu), s = sigma)
         
-        # Convolución para obtener probabilidad en cada estado de daño
+        # Convolución para obtener probabilidad en cada estado de daño: puntos para generacion de curvas
         for k in range(len(thetas_DS)):
             var_col_DS = 'DS' + str(k+1)
             var_col_cdf = 'CDF_DS' + str(k+1)
@@ -443,7 +441,7 @@ def fragility_function_prob_collapseOptions(dataF_IM_EDP_Hz, EDP_cens, thetas_DS
     # 4. AJUSTE DE PROBABILIDAD PARA COLAPSO
     ################################################################
     
-    Prob_diferent_for_colapse = 0 #0: No se ajusta el colapso de forma distinta a los demas DS, 1: Si se ajusta diferente y entra al primer if
+    Prob_diferent_for_colapse = 1 #0: No se ajusta el colapso de forma distinta a los demas DS, 1: Si se ajusta diferente y entra al primer if
     
     if collapse_method == 'fit' and Prob_diferent_for_colapse == 1:
         # Para colapso (DS4) la formulación de la probabilidad se hace un ponderado de la siguiente forma:
@@ -1216,8 +1214,8 @@ Se crean cuatro diccionarios de interés:
         IM - EDP - HzLv
 """
 
-def taxonomy_calculation(fname_resultsBuildings, T, taxonomy_list, matriz_filter_tax, results_path, IM_name_graph, EDP_name_graph, story, timeOK, EDP_limit,
-                         include_cens, porc_curves, collapse_method, tipo_bin, min_datos_bin, num_bins_inicial, IM_max_graph, ventana_GUI, col_name_tax, delta_max_edp):
+def taxonomy_calculation(fname_resultsBuildings, T, taxonomy_list, matriz_filter_tax, results_path, IM_name_graph, EDP_name_graph, story, include_cens,
+                         porc_curves, collapse_method, tipo_bin, min_datos_bin, num_bins_inicial, IM_max_graph, ventana_GUI, col_name_tax, delta_max_edp):
     
     
     # # Definición de deltas y valores maximios de  EDPs
@@ -1326,7 +1324,7 @@ def taxonomy_calculation(fname_resultsBuildings, T, taxonomy_list, matriz_filter
                     continue
                 
                 ######################################################################  
-                # Busqueda de carpeta con la que se corrió la edificación
+                # Busqueda de carpeta CSS con la que se corrió la edificación
                 ######################################################################  
                 
                 # Nombre de la carpeta que contiene los acelerogramas con los que se corrió la edificacion
@@ -1336,11 +1334,14 @@ def taxonomy_calculation(fname_resultsBuildings, T, taxonomy_list, matriz_filter
                 accel_folder_path = os.path.join(results_path, accel_folder_name)
                 
                 ######################################################################  
-                # Hazard Levels de interes
+                # Hazard Levels de interes y test de tiempos
                 ######################################################################
                 
                 Hzlv_curves = buildings.loc[buildings['Building Folder Name']==current_building]['Hz_levels'].tolist()[0]
                 Hzlv_curves = np.asarray(Hzlv_curves.split(",")).astype(int)
+                
+                timeOK = float(buildings.loc[buildings['Building Folder Name']==current_building]['Time clean'].tolist()[0])
+                EDP_limit = float(buildings.loc[buildings['Building Folder Name']==current_building]['SDR clean'].tolist()[0])
                 
                 ######################################################################
                 # Lectura de Datos
@@ -1360,7 +1361,7 @@ def taxonomy_calculation(fname_resultsBuildings, T, taxonomy_list, matriz_filter
                 # Organización de datos para estimar fragilidad
                 ######################################################################
                 
-                # Se define si el im es Sa o SaAVG
+                # Se define si el IM es Sa o SaAVG
                 if IM_name_graph == "Sa":
                     IM_data = Sa_All_HzLVLs
                 elif IM_name_graph == "SaAVG":
@@ -1401,6 +1402,7 @@ def taxonomy_calculation(fname_resultsBuildings, T, taxonomy_list, matriz_filter
                     theta_ds = []
                     beta_ds = []
                     
+                    # OJO CON ESTO: Asume que siempre se coloca en el excel guia el ultimo DS aun cuando el método no sea fit
                     if collapse_method == 'count' or collapse_method == 'count columns':
                         cantidad_DS_cens = cantidad_DS - 1
                     else:
@@ -1413,7 +1415,7 @@ def taxonomy_calculation(fname_resultsBuildings, T, taxonomy_list, matriz_filter
                     EDP_collapse = float(buildings.loc[buildings['Building Folder Name']==current_building]['Limit Collapse (count)'].tolist()[0])
                     EDP_cens = float(buildings.loc[buildings['Building Folder Name']==current_building]['EDP cens'].tolist()[0])
 
-                    # Intenta crear una data frame para el conteo de columnas cuando sea el caso, si no lo encuentra lo crea vacío
+                    # Intenta crear una dataframe para el conteo de columnas cuando sea el caso, si no lo encuentra lo crea vacío
                     if collapse_method =='count columns':
                         count_colap_columns = input_colum_count(accel_folder_path, building_folder_path, T, IM_name_graph, EDP_name_graph, story, EDP_collapse, timeOK, EDP_limit)
                         count_colap_columns = count_colap_columns.loc[count_colap_columns['Hz Lv'].isin(Hzlv_curves)]
@@ -1507,18 +1509,13 @@ def taxonomy_calculation(fname_resultsBuildings, T, taxonomy_list, matriz_filter
             ######################################################################
             
             # IMPORTANTE:
-            # Se asume que el theta y beta para una misma taxonomia es el promedio de los thetas 
+            # Se asume que el theta y beta para una misma taxonomia es el promedio de los thetas y betas de las edificaciones
             
             print('Start the calculation of: ', str(current_taxonomy))
             
-            # # Imprime los valores en la variable satatus_taxonomy de la GUI
-            # ventana_GUI.status_taxonomy.setText('Start the calculation of: ' + str(current_taxonomy))
-            # QApplication.processEvents() # Forzar la actualización de la interfaz gráfica en cada iteración
             
             # ------------------------------------------
             # Data para estimar fragilidad
-            
-            # print('Empezó a calcular TAXONOMIA ' + current_taxonomy)
             
             
             # Este try es para que si no es posible estimar fragilidad, no se tenga en cuenta
@@ -1537,7 +1534,7 @@ def taxonomy_calculation(fname_resultsBuildings, T, taxonomy_list, matriz_filter
                     beta_ds.append(round(buildings['Beta'+str(i+1)+' DS-EDP'].mean(),4))
                 
                 EDP_collapse = round(buildings['Limit Collapse (count)'].mean(),4)
-                EDP_cens = 1.5*EDP_collapse
+                EDP_cens = round(buildings['EDP cens'].mean(),4)
                     
                 [parameters, matriz_plot, fragility, matriz_IM_EDP] = fragility_function_prob_collapseOptions(dataF_IM_EDP, EDP_cens, theta_ds, beta_ds, tipo_bin, min_datos_bin, 
                                                                                                               num_bins_inicial, IM_max_graph, d_edp, edp_max, include_cens, porc_curves,
