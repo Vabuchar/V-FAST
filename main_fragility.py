@@ -3,7 +3,7 @@
 
 V-FAST: VULNERABILITY AND FRAGILITY ASSESSMENT TOOLKIT
 ----------------------------------------------------------------------------------------
-VERSION: VO1
+VERSION: VO1.1
 AUTORES: ABUCHAR, V.J, ARTETA C.A. (2023)
 
 """
@@ -319,14 +319,43 @@ class MiApp(QtWidgets.QMainWindow):
         except NameError:
             print('Error with the function that asign automatically CSS hazard')
             
+        # ------------------------------------------------------------------------
+        # Modificacion de opciones de acuerdo con excel # PENDIENTE POR REVISAR
+        # ------------------------------------------------------------------------
+        try:
+            # Haz Lev
+            self.ui.hazard_value_1.clear()
+            self.ui.hazard_value_1.setText(building_guide_original[building_guide_original['Building Folder Name']==NameFolder]['Hz_levels'].tolist()[0])
+            
+            # Thetas
+            self.ui.theta_value_1.clear()
+            self.ui.theta_value_1.setText(building_guide_original[building_guide_original['Building Folder Name']==NameFolder]['List_Thetas'].tolist()[0])
+            
+            # Betas
+            self.ui.sigma_value_1.clear()
+            self.ui.sigma_value_1.setText(building_guide_original[building_guide_original['Building Folder Name']==NameFolder]['List_Betas'].tolist()[0])
+            
+            # Colapso count
+            self.ui.EDPCollapse_value_1.clear()
+            self.ui.EDPCollapse_value_1.setText(str(building_guide_original[building_guide_original['Building Folder Name']==NameFolder]['Limit Collapse (count)'].tolist()[0]))
+            
+            # Censura
+            self.ui.EDPcens_value_1.clear()
+            self.ui.EDPcens_value_1.setText(str(building_guide_original[building_guide_original['Building Folder Name']==NameFolder]['EDP cens'].tolist()[0]))
+            
+        except:
+            pass
+            
+            
     # ----------------------------------------------------------------------------       
     # Explorador de archivos para carpetas de resultados de corridas de la edificación 2
     # ----------------------------------------------------------------------------             
     def clicker_EDP_2(self):
-        global fname_EdpB2, fname_HzB2
+        global fname_EdpB2, fname_HzB2, BFolder_E2
         
         fname_EdpB2 = str(QFileDialog.getExistingDirectory(self, "Open EDP Folder Building 2" ))
         NameFolder = os.path.basename(fname_EdpB2)
+        BFolder_name_E2 = NameFolder
         self.label_EdpB2.setText(NameFolder)
         
         # ------------------------------------------------------------------------
@@ -365,6 +394,33 @@ class MiApp(QtWidgets.QMainWindow):
             
         except NameError:
             print('Error with the function that asign automatically CSS hazard')
+            
+        # ------------------------------------------------------------------------
+        # Modificacion de opciones de acuerdo con excel # PENDIENTE POR REVISAR
+        # ------------------------------------------------------------------------
+        try:
+            # Haz Lev
+            self.ui.hazard_value_2.clear()
+            self.ui.hazard_value_2.setText(building_guide_original[building_guide_original['Building Folder Name']==NameFolder]['Hz_levels'].tolist()[0])
+            
+            # Thetas
+            self.ui.theta_value_2.clear()
+            self.ui.theta_value_2.setText(building_guide_original[building_guide_original['Building Folder Name']==NameFolder]['List_Thetas'].tolist()[0])
+            
+            # Betas
+            self.ui.sigma_value_2.clear()
+            self.ui.sigma_value_2.setText(building_guide_original[building_guide_original['Building Folder Name']==NameFolder]['List_Betas'].tolist()[0])
+            
+            # Colapso count
+            self.ui.EDPCollapse_value_2.clear()
+            self.ui.EDPCollapse_value_2.setText(str(building_guide_original[building_guide_original['Building Folder Name']==NameFolder]['Limit Collapse (count)'].tolist()[0]))
+            
+            # Censura
+            self.ui.EDPcens_value_2.clear()
+            self.ui.EDPcens_value_2.setText(str(building_guide_original[building_guide_original['Building Folder Name']==NameFolder]['EDP cens'].tolist()[0]))
+            
+        except:
+            pass
     
     # ----------------------------------------------------------------------------
     # Explorador de archivos para abrir carpeta general donde estaran subcarpetas de grupos de resultados
@@ -926,6 +982,7 @@ class MiApp(QtWidgets.QMainWindow):
         self.grafica_dispersion_1.ax.set_ylabel(EDP_name_graph_E1 + r'$_{'+story_E1+'}$', size = 10)
         self.grafica_dispersion_1.ax.grid(which="both", alpha = 0.5)
         self.grafica_dispersion_1.ax.legend(fontsize=7)
+        self.grafica_dispersion_1.fig.subplots_adjust(left=0.14, right=0.9, top=0.88, bottom=0.16)
 
         self.ui.Dispersion_B1.addWidget(self.grafica_dispersion_1)
         
@@ -1034,6 +1091,7 @@ class MiApp(QtWidgets.QMainWindow):
         self.grafica_dispersion_2.ax.set_ylabel(EDP_name_graph_E2 + r'$_{'+story_E2+'}$', size = 10)
         self.grafica_dispersion_2.ax.grid(which="both", alpha = 0.5)
         self.grafica_dispersion_2.ax.legend(fontsize=7)
+        self.grafica_dispersion_2.fig.subplots_adjust(left=0.14, right=0.9, top=0.88, bottom=0.16)
 
         self.ui.Dispersion_B2.addWidget(self.grafica_dispersion_2)
         
@@ -1122,6 +1180,7 @@ class MiApp(QtWidgets.QMainWindow):
         self.grafica_bineado_DET_1.ax.set_ylabel(EDP_name_graph_E1 + r'$_{'+story_E1+'}$', size = 10)
         self.grafica_bineado_DET_1.ax.grid(which="both", alpha = 0.5)
         self.grafica_bineado_DET_1.ax.legend(fontsize=7, loc = 'best')
+        self.grafica_bineado_DET_1.fig.subplots_adjust(left=0.14, right=0.9, top=0.88, bottom=0.16)
         
         self.ui.BinD_1.addWidget(self.grafica_bineado_DET_1)
         
@@ -1163,6 +1222,7 @@ class MiApp(QtWidgets.QMainWindow):
         self.grafica_SEOC_DET_1.ax.set_ylabel('P(' + EDP_name_graph_E1 + r'$_{'+story_E1+'}$' + ' ' +'> j)', size = 10)
         self.grafica_SEOC_DET_1.ax.grid(which="both")
         self.grafica_SEOC_DET_1.ax.legend(fontsize=7, loc = 'best')
+        self.grafica_SEOC_DET_1.fig.subplots_adjust(left=0.125, right=0.9, top=0.88, bottom=0.14)
         
         self.ui.graph_fragilityD_1.addWidget(self.grafica_SEOC_DET_1)
         
@@ -1249,6 +1309,7 @@ class MiApp(QtWidgets.QMainWindow):
         self.grafica_bineado_DET_2.ax.set_ylabel(EDP_name_graph_E2 + r'$_{'+story_E2+'}$', size = 10)
         self.grafica_bineado_DET_2.ax.grid(which="both", alpha = 0.5)
         self.grafica_bineado_DET_2.ax.legend(fontsize=7, loc = 'best')
+        self.grafica_bineado_DET_2.fig.subplots_adjust(left=0.14, right=0.9, top=0.88, bottom=0.16)
         
         self.ui.BinD_2.addWidget(self.grafica_bineado_DET_2)
         
@@ -1290,6 +1351,7 @@ class MiApp(QtWidgets.QMainWindow):
         self.grafica_SEOC_DET_2.ax.set_ylabel('P(' + EDP_name_graph_E2 + r'$_{'+story_E2+'}$' + ' ' +'> j)', size = 10)
         self.grafica_SEOC_DET_2.ax.grid(which="both")
         self.grafica_SEOC_DET_2.ax.legend(fontsize=7, loc = 'best')
+        self.grafica_SEOC_DET_2.fig.subplots_adjust(left=0.125, right=0.9, top=0.88, bottom=0.14)
         
         self.ui.graph_fragilityD_2.addWidget(self.grafica_SEOC_DET_2)
         
@@ -1336,7 +1398,7 @@ class MiApp(QtWidgets.QMainWindow):
         
         # Intenta crear una data frame para el conteo de columnas cuando sea el caso, si no lo encuentra lo crea vacío
         if collapse_method_E1 =='count columns':
-            count_colap_columns_E1 = input_colum_count(fname_HzB1, fname_EdpB1, T_E1, IM_name_graph_E1, EDP_name_graph_E1, story_E1, EDP_collapse_E1, timeOK_E1, SDR_limit_E1)
+            count_colap_columns_E1 = input_colum_count(fname_HzB1, fname_EdpB1, T_E1, IM_name_graph_E1, EDP_name_graph_E1, story_E1, EDP_collapse_E1, timeOK_E1, EDP_limit_E1)
             count_colap_columns_E1 = count_colap_columns_E1.loc[count_colap_columns_E1['Hz Lv'].isin(Hzlv_curves_E1)]
         else:
             count_colap_columns_E1 = {}
@@ -1384,6 +1446,7 @@ class MiApp(QtWidgets.QMainWindow):
         self.grafica_bineado_PROB_1.ax.set_ylabel(EDP_name_graph_E1 + r'$_{'+story_E1+'}$', size = 10)
         self.grafica_bineado_PROB_1.ax.legend(fontsize=7, loc = 'best')
         self.grafica_bineado_PROB_1.ax.grid(which="both", alpha = 0.5)
+        self.grafica_bineado_PROB_1.fig.subplots_adjust(left=0.14, right=0.9, top=0.88, bottom=0.16)
         
         self.ui.BinP_1.addWidget(self.grafica_bineado_PROB_1)
         
@@ -1413,6 +1476,7 @@ class MiApp(QtWidgets.QMainWindow):
         self.grafica_SEOC_PROB_1.ax.set_ylabel('P(DS >= ds)', size = 10)
         self.grafica_SEOC_PROB_1.ax.grid(which="both")
         self.grafica_SEOC_PROB_1.ax.legend(fontsize=7, loc = 'best')
+        self.grafica_SEOC_PROB_1.fig.subplots_adjust(left=0.125, right=0.9, top=0.88, bottom=0.14)
         
         self.ui.graph_fragilityP_1.addWidget(self.grafica_SEOC_PROB_1)
         
@@ -1505,7 +1569,7 @@ class MiApp(QtWidgets.QMainWindow):
         
         # Intenta crear una data frame para el conteo de columnas cuando sea el caso, si no lo encuentra lo crea vacío
         if collapse_method_E2 =='count columns':
-            count_colap_columns_E2 = input_colum_count(fname_HzB_2, fname_EdpB_2, T_E2, IM_name_graph_E2, EDP_name_graph_E2, story_E2, EDP_collapse_E2, timeOK_E2, SDR_limit_E2)
+            count_colap_columns_E2 = input_colum_count(fname_HzB2, fname_EdpB2, T_E2, IM_name_graph_E2, EDP_name_graph_E2, story_E2, EDP_collapse_E2, timeOK_E2, EDP_limit_E2)
             count_colap_columns_E2 = count_colap_columns_E2.loc[count_colap_columns_E2['Hz Lv'].isin(Hzlv_curves_E2)]
         else:
             count_colap_columns_E2 = {}
@@ -1553,6 +1617,8 @@ class MiApp(QtWidgets.QMainWindow):
         self.grafica_bineado_PROB_2.ax.set_ylabel(EDP_name_graph_E2 + r'$_{'+story_E2+'}$', size = 10)
         self.grafica_bineado_PROB_2.ax.legend(fontsize=7, loc = 'best')
         self.grafica_bineado_PROB_2.ax.grid(which="both", alpha = 0.5)
+        self.grafica_bineado_PROB_2.fig.subplots_adjust(left=0.14, right=0.9, top=0.88, bottom=0.16)
+        
         
         self.ui.BinP_2.addWidget(self.grafica_bineado_PROB_2)
         
@@ -1582,6 +1648,7 @@ class MiApp(QtWidgets.QMainWindow):
         self.grafica_SEOC_PROB_2.ax.set_ylabel('P(DS >= ds)', size = 10)
         self.grafica_SEOC_PROB_2.ax.grid(which="both")
         self.grafica_SEOC_PROB_2.ax.legend(fontsize=7, loc = 'best')
+        self.grafica_SEOC_PROB_2.fig.subplots_adjust(left=0.125, right=0.9, top=0.88, bottom=0.14)
         
         self.ui.graph_fragilityP_2.addWidget(self.grafica_SEOC_PROB_2)
         
@@ -1723,6 +1790,8 @@ class MiApp(QtWidgets.QMainWindow):
         self.grafica_comparison.ax.set_ylabel('EDP', size = 10)
         self.grafica_comparison.ax.grid(which="both")
         self.grafica_comparison.ax.legend(fontsize=5.5, loc = 'best')
+        self.grafica_comparison.fig.subplots_adjust(left=0.14, right=0.9, top=0.88, bottom=0.16)
+        
         self.ui.graph_comparison.addWidget(self.grafica_comparison)  
     
 #%% # FUNCIÓN PARA GRAFICAR COMBINACIÓN DE CURVAS DE FRAGILIDAD   
@@ -1828,9 +1897,10 @@ class MiApp(QtWidgets.QMainWindow):
         self.grafica_combination.ax.set_xlim(0, 2.5)
         self.grafica_combination.ax.set_xlabel('IM', size = 10)
         self.grafica_combination.ax.set_ylabel('EDP', size = 10)
-
         self.grafica_combination.ax.grid(which="both")
         self.grafica_combination.ax.legend(fontsize=7, loc = 'lower right')
+        self.grafica_combination.fig.subplots_adjust(left=0.14, right=0.9, top=0.88, bottom=0.16)
+        
         self.ui.graph_combine_curve.addWidget(self.grafica_combination)
         
 #%% # FUNCIÓN PARA GRAFICAR PDFS DE LA EDIFICACION 1       
@@ -2074,10 +2144,6 @@ class MiApp(QtWidgets.QMainWindow):
         ######################################################################  
         # LECTURA DE PARAMETROS GENERALES
         
-        # Revisión de corridas
-        timeOK = float(self.ui.tmin_value_3.text())
-        EDP_limit = float(self.ui.EDP_value_3.text())
-        
         # Periodos de interes 
         T = self.ui.periodo_value_3.text()
         T = np.asarray(T.split(",")).astype(float)
@@ -2141,10 +2207,9 @@ class MiApp(QtWidgets.QMainWindow):
         
         # Llamado de función que genera taxonomias
         [dict_param_buildings, dict_param_taxonomy, dict_points_fragility, dict_data_IM_EDP_HzLv] = taxonomy_calculation(fname_resultsBuildings, T, taxonomy_list, matriz_filter_tax, 
-                                                                                                                         results_path, IM_name_graph, EDP_name_graph, story, timeOK, 
-                                                                                                                         EDP_limit, include_cens, porc_curves, collapse_method, tipo_bin, 
-                                                                                                                         min_datos_bin, num_bins_inicial, IM_max_graph, self.ui, col_name_tax, 
-                                                                                                                         delta_max_edp)
+                                                                                                                         results_path, IM_name_graph, EDP_name_graph, story, include_cens,
+                                                                                                                         porc_curves, collapse_method, tipo_bin, min_datos_bin, num_bins_inicial,
+                                                                                                                         IM_max_graph, self.ui, col_name_tax, delta_max_edp)
         ################################### 
         # CREACIÓN DE EXCEL DE RESULTADOS
         
@@ -3356,7 +3421,7 @@ class MiApp(QtWidgets.QMainWindow):
             
             num_ds = len(new_thetas_T1)
         
-        elif change_type_T1 == '% curves fitting':
+        elif change_type_T1 == '% Curves fitting':
             
             new_porc_fit = self.ui.porc_fit_curves_changes_value_1.text()
             new_porc_fit = np.asarray(new_porc_fit.split(",")).astype(float)
@@ -3390,7 +3455,7 @@ class MiApp(QtWidgets.QMainWindow):
             for i in range(num_ds):
                 matriz_plot['DS' + str(i+1)] = norm.cdf(np.log(IM_plot), np.log(new_thetas_T1[i]), new_betas_T1[i])
             
-        elif change_type_T1 == '% curves fitting' or change_type_T1 == 'IM limits':
+        elif change_type_T1 == '% Curves fitting' or change_type_T1 == 'IM limits':
             
             # Puntos que generan los DS
             DS_IM_data = dict_points_fragility[str(T_T1)][Tax_T1]
@@ -3427,7 +3492,7 @@ class MiApp(QtWidgets.QMainWindow):
                 fragility2 = fragility.copy()
                 
                 # Selección de data que no se tendrá en cuenta dependiendo del tipo de ajuste
-                if change_type_T1 == '% curves fitting':
+                if change_type_T1 == '% Curves fitting':
                 
                     current_porc = new_porc_fit[i]
                     
@@ -3647,7 +3712,7 @@ class MiApp(QtWidgets.QMainWindow):
             
             num_ds = len(new_thetas_T2)
         
-        elif change_type_T2 == '% curves fitting':
+        elif change_type_T2 == '% Curves fitting':
             
             new_porc_fit = self.ui.porc_fit_curves_changes_value_2.text()
             new_porc_fit = np.asarray(new_porc_fit.split(",")).astype(float)
@@ -3681,12 +3746,12 @@ class MiApp(QtWidgets.QMainWindow):
             for i in range(num_ds):
                 matriz_plot['DS' + str(i+1)] = norm.cdf(np.log(IM_plot), np.log(new_thetas_T2[i]), new_betas_T2[i])
             
-        elif change_type_T2 == '% curves fitting' or change_type_T2 == 'IM limits':
+        elif change_type_T2 == '% Curves fitting' or change_type_T2 == 'IM limits':
             
             # Puntos que generan los DS
             DS_IM_data = dict_points_fragility[str(T_T2)][Tax_T2]
             
-            # Generacion de vedctor de parámetros
+            # Generacion de vector de parámetros
             new_thetas_T2 = np.array([])
             new_betas_T2 = np.array([])
             
@@ -3718,7 +3783,7 @@ class MiApp(QtWidgets.QMainWindow):
                 fragility2 = fragility.copy()
                 
                 # Selección de data que no se tendrá en cuenta dependiendo del tipo de ajuste
-                if change_type_T2 == '% curves fitting':
+                if change_type_T2 == '% Curves fitting':
                 
                     current_porc = new_porc_fit[i]
                     
